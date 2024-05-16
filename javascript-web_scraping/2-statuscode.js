@@ -1,14 +1,16 @@
 #!/usr/bin/node
-const fs = require('fs');
+const request = require('request');
 
-// Get the file path from the command line arguments
-const filePath = process.argv[2];
-const content = process.argv[3];
+// Get the URL from the command line arguments
+const url = process.argv[2];
 
-// Use fs.readFile to read the file content in utf-8
-fs.writeFile(filePath, content, 'utf-8', (error) => {
+// Use request to make a GET request to the URL
+request.get(url, (error, response) => {
   // If an error occurred, print the error object
   if (error) {
     console.log(error);
+  } else {
+    // Print the status code of the response
+    console.log(`code: ${response.statusCode}`);
   }
 });
